@@ -1,10 +1,7 @@
-package com.lambdaschool.notetaker
+package com.lambdaschool.notetakerroom
 
 import android.app.Activity
-import android.content.Intent
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.lambdaschool.notetakerroom.R
 
 object ThemeUtils {
     internal fun getSelectedTheme(activity: Activity): Int {

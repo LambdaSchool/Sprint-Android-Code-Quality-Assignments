@@ -1,7 +1,4 @@
-package com.lambdaschool.notetaker
-
-import android.content.SharedPreferences
-import com.lambdaschool.notetaker.SharedPrefsDao.idsString
+package com.lambdaschool.notetakerroom
 
 import java.util.ArrayList
 
@@ -60,14 +57,14 @@ object SharedPrefsDao {
     }
 
     fun setNote(note: Note) {
-        if (note.getId() == Note.NO_ID) {
-            note.setId(nextId)
+        if (note.id == Note.NO_ID.toLong()) {
+            note.id = nextId.toLong()
         }
         val ids = allIds
         var exists = false
         for (id in ids) {
             if (id != "") {
-                if (note.getId() == id) {
+                if (note.id == id.toLong()) {
                     exists = true
                     break
                 }
@@ -75,7 +72,7 @@ object SharedPrefsDao {
         }
 
         if (!exists) {
-            addId(note.getId())
+            addId(note.id.toString())
         }
 
         addNote(note)
@@ -83,7 +80,7 @@ object SharedPrefsDao {
 
     private fun addNote(note: Note) {
         val editor = MainActivity.preferences?.edit()
-        editor?.putString(KEY_ID_PREFIX + note.getId()!!, note.toCsvString())
+        editor?.putString(KEY_ID_PREFIX + note.id, note.toCsvString())
         editor?.apply()
     }
 

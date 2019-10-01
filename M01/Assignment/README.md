@@ -12,3 +12,16 @@ As a recap, the project when working properly should:
 
 - Allow the user to create notes that are saved to a Firebase Database and an on-device persistent store using an SQL database
 - The device's persistent store is synchronized with the Firebase Database. (When a journal entry is saved to the device's persistent store it gets sent to Firebase, and vice-versa.
+
+## List of Bugs Found
+-Rebuilding the project hilighted missing code from the AndroidManifest file.  
+
+	-refactored the package name of the layout files.  
+
+	-Fixed the manifest file  
+
+	-Added constraint layout to dependencies  
+
+	-Created new Vector Assets in the res/drawable directory
+
+	-Fixed SharedPrefsDao errors

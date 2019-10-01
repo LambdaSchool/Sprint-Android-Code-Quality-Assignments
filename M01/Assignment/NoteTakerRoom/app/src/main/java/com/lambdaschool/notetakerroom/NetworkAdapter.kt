@@ -1,10 +1,9 @@
-package com.lambdaschool.notetaker
+package com.lambdaschool.notetakerroom
 
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
@@ -49,7 +48,7 @@ object NetworkAdapter {
                 }
             }
 
-        } catch (e: MalformedURLException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
             result = e.message ?: ""
         } catch (e: IOException) {

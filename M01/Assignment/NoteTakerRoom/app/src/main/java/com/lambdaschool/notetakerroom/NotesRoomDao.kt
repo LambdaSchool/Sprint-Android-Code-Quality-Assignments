@@ -3,7 +3,6 @@ package com.lambdaschool.notetakerroom
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.lambdaschool.notetaker.Note
 
 @Dao
 interface NotesRoomDao {
