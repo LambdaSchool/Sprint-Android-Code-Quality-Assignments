@@ -111,13 +111,5 @@ object NetworkAdapter {
             connection?.disconnect()
         }
         return result
-
-        /*try {
-            downloadThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return result[0];*/
     }
 }

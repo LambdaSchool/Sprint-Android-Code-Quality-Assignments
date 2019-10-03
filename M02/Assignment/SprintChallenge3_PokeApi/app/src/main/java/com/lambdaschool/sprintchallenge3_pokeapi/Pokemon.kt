@@ -1,8 +1,8 @@
 package com.lambdaschool.sprintchallenge3_pokeapi
 
 import android.graphics.Bitmap
+import com.google.gson.JsonObject
 import org.json.JSONException
-import org.json.JSONObject
 
 import java.io.Serializable
 import java.util.ArrayList
@@ -32,38 +32,38 @@ class Pokemon : Serializable {
         this.spriteUrl = ""
     }
 
-    constructor(json: JSONObject) {
+    constructor(json: JsonObject) {
         try {
-            this.id = json.getInt("id")
+            this.id = json.get("id").asInt
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
         try {
-            this.name = json.getString("name")
+            this.name = json.get("name").asString
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
         try {
-            this.spriteUrl = json.getJSONObject("sprites").getString("front_default")
+            this.spriteUrl = json.get("sprites").asJsonObject.get("front_default").asString
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
         try {
-            val typesArray = json.getJSONArray("types")
-            this.typeA = typesArray.getJSONObject(0).getJSONObject("type").getString("name")
-            this.typeB = typesArray.getJSONObject(1).getJSONObject("type").getString("name")
+            val typesArray = json.getAsJsonArray("types")
+            this.typeA = typesArray.get(0).asJsonObject.get("type").asJsonObject.get("name").asString
+            //this.typeB = typesArray.get(1).asJsonObject.get("type").asJsonObject.get("name").asString
         } catch (e: JSONException) {
             e.printStackTrace()
         }
 
         try {
             this.moves = ArrayList()
-            val movesArray = json.getJSONArray("moves")
-            for (i in 0 until movesArray.length()) {
-                this.moves!!.add(movesArray.getJSONObject(i).getJSONObject("move").getString("name"))
+            val movesArray = json.getAsJsonArray("moves")
+            for (i in 0 until movesArray.size()) {
+                this.moves!!.add(movesArray.get(i).asJsonObject.get("move").asJsonObject.get("name").asString)
             }
         } catch (e: JSONException) {
             e.printStackTrace()
