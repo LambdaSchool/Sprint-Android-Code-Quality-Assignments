@@ -3,16 +3,19 @@ package com.lambdaschool.sprintchallenge3_pokeapi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
+import leakcanary.LeakCanary
 
 class MainActivity : AppCompatActivity() {
 
     internal var context: Context? = null
+    private lateinit var pokemonViewModel: PokemonViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +24,10 @@ class MainActivity : AppCompatActivity() {
         context = this
         names_list_layout
 
+        pokemonViewModel = ViewModelProvider(this).get(PokemonViewModel::class.java)
+
         findViewById<View>(R.id.search_button).setOnClickListener {
+//            startActivity(LeakCanary.newLeakDisplayActivityIntent())
             val intent = Intent(context, PokemonDetailsActivity::class.java)
             intent.putExtra("Search_Parameter", (findViewById<View>(R.id.search_bar) as EditText).text.toString())
             startActivityForResult(intent, 0)
@@ -54,5 +60,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
