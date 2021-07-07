@@ -19,7 +19,7 @@ class NoteViewModel : ViewModel() {
     }
 
     private fun loadList(context: Context) {
-        repo = NoteRepository()
+        repo = NoteRepository(context)
         noteList = repo!!.getNotes(context)
     }
 

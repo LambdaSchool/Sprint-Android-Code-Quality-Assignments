@@ -4,17 +4,17 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import com.lambdaschool.notetakerroom.NotesRoomDB
-import java.util.*
+
 
 class NoteRepository(context: Context) {
-    //    private ArrayList<Note> notes;
-    lateinit var liveDataList: MutableLiveData<ArrayList<Note>>
+
+   // val notes = arrayListOf<Note>()
 
     private val notesFromCache: ArrayList<Note>
         get() = NotesDbDao.readAllNotes()
 
     private val database by lazy {
-        Room.databaseBuilder(
+        return@lazy Room.databaseBuilder(
             context.applicationContext,
             NotesRoomDB::class.java, "notes_database"
         ).fallbackToDestructiveMigration().build()
@@ -25,10 +25,10 @@ class NoteRepository(context: Context) {
     }*/
 
     fun getNotes(context: Context): MutableLiveData<ArrayList<Note>> {
-        liveDataList = MutableLiveData()
+        Companion.liveDataList = MutableLiveData()
         NotesDbDao.initializeInstance(context)
         // retrieve notes from cache
-        val ldList = liveDataList
+        val ldList = Companion.liveDataList
         ldList.value = notesFromCache
         // retrieve notes from online DB
         Thread(Runnable {
@@ -38,11 +38,15 @@ class NoteRepository(context: Context) {
         return ldList
     }
 
-    fun addNote(note: Note) {
+    fun addNote(note: Note): java.util.ArrayList<Note> {
         Thread(Runnable {
             database.notesDao().createNote(note)
-            liveDataList.postValue(notesFromCache)
+            Companion.liveDataList.postValue(notesFromCache)
         }).start()
-        //        return SharedPrefsDao.getAllNotes();
+        return SharedPrefsDao.allNotes
+    }
+
+    companion object {
+        lateinit var liveDataList: MutableLiveData<ArrayList<Note>>
     }
 }

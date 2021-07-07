@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class NotesDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+internal class NotesDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         sqLiteDatabase.execSQL(NotesDbContract.NotesEntry.SQL_CREATE_TABLE)
@@ -20,7 +20,7 @@ class NotesDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     companion object {
-        private val DATABASE_VERSION = 0
+        private val DATABASE_VERSION = 2
         private val DATABASE_NAME = "NotesDatabase.db"
     }
 }

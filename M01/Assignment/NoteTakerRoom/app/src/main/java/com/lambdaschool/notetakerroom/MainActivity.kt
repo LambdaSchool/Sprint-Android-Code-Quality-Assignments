@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.lambdaschool.notetakerroom.R
 
+
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {

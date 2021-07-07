@@ -28,10 +28,6 @@ object ThemeUtils {
     }
 
     fun checkTheme(activity: Activity, activeTheme: Int): Boolean {
-        return if (getSelectedTheme(activity) == activeTheme) {
-            true
-        } else {
-            false
-        }
+        return getSelectedTheme(activity) == activeTheme
     }
 }
